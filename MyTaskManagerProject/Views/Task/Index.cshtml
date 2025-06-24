@@ -1,0 +1,56 @@
+﻿@using MyTaskManagerProject.Models.Domain
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container">
+    <div>
+        <h2>Списко задач:</h2>
+    </div>
+    <div>
+        <div>
+            <ul class="">
+                @foreach (TaskItem task in ViewBag.Tasks)
+                {
+                    <li class="m-3 p-0">
+                        <div class="card">
+                            <div class="card-header d-xl-inline-flex">
+                                <div class="fw-bold pr-3">
+                                    @task.Title
+                                </div>
+                                <div class="px-3">
+                                    Тип задачи: @task.TaskType
+                                </div>
+                                <div class="px-3">
+                                    Статус:
+                                    @if (task.Status)
+                                    {
+                                        <span class="text-success">
+                                            Выполнено
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-warning">
+                                            В процессе
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                @task.Description
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-success">
+                                    Задача добавлена: @task.CreatedAt
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
