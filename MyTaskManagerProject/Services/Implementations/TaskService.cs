@@ -5,7 +5,7 @@ namespace MyTaskManagerProject.Services.Implementations
     public class TaskService : ITaskService
     {
 
-        private List<TaskItem> _tasks = new List<TaskItem>()
+        /*private List<TaskItem> _tasks = new List<TaskItem>()
         {
             new TaskItem()
             {
@@ -34,7 +34,7 @@ namespace MyTaskManagerProject.Services.Implementations
                 Title = "Task 1",
                 Description = "Desctiption 5"
             },
-        };
+        };*/
 
         public bool AddTask(TaskItem newTask)
         {

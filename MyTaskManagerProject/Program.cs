@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MyTaskManagerProject.Data;
 using MyTaskManagerProject.Services;
 using MyTaskManagerProject.Services.Implementations;
 
@@ -10,6 +12,16 @@ namespace MyTaskManagerProject
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                string? connectionString = builder.Configuration.GetConnectionString("Default");
+                if(connectionString != null)
+                {
+                    throw new MissingFieldException("Connection string is null!");
+                }
+                options.UseSqlServer();
+            });
 
             builder.Services.AddScoped<ITaskService, TaskService>();
 

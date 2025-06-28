@@ -2,7 +2,7 @@
 {
     public class User
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public required string Login { get; set; }
 
@@ -12,8 +12,10 @@
 
         public string? PhoneNumber { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
+        public required DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get;set; }
+
+        public List<TaskItem> Tasks { get; set; } = new List<TaskItem>();
     }
 }
