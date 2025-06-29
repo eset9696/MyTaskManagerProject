@@ -16,14 +16,15 @@ namespace MyTaskManagerProject
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 string? connectionString = builder.Configuration.GetConnectionString("Default");
-                if(connectionString != null)
+                if(connectionString == null)
                 {
                     throw new MissingFieldException("Connection string is null!");
                 }
-                options.UseSqlServer();
+                options.UseSqlServer(connectionString);
             });
 
             builder.Services.AddScoped<ITaskService, TaskService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 

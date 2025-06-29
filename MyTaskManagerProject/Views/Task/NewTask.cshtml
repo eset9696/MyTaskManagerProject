@@ -1,0 +1,43 @@
+﻿@model MyTaskManagerProject.Models.Domain.TaskItem
+@using MyTaskManagerProject.Enums
+
+<div class="container">
+    <div>
+        <h2>Новая задача:</h2>
+    </div>
+    <div>
+        <form method="post" asp-action="CreateTask" asp-controller="Task">
+            <div class="mb-3 d-xl-inline-flex justify-content-end w-100">
+                <div class="me-3 flex-grow-1">
+                    <div>
+                        <label asp-for="Title">Заголовок задачи:</label>
+                    </div>
+                    <div>
+                        <input class="form-control" type="text" name="Title" asp-for="Title" required/>
+                    </div>
+                </div>
+                <div class="">
+                    <div>
+                        <label asp-for="TaskType">Тип задачи:</label>
+                    </div>
+                    <select class="form-control" name="TaskType">
+                        <option value="@TaskTypeEnum.Daily">Раз в день</option>
+                        <option value="@TaskTypeEnum.Weekly">Каждую неделю</option>
+                        <option value="@TaskTypeEnum.Monthly">Каждый месяц</option>
+                        <option value="@TaskTypeEnum.Yearly">Раз в год</option>
+                        <option value="@TaskTypeEnum.Single" selected>Разовая</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-md-block mb-3">
+                <div>
+                    <label asp-for="Description">Описание задачи:</label>
+                </div>
+                <textarea class="form-control" name="Description" rows="20" asp-for="Description"></textarea>
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" name="CreateTask" value="Создать задачу" />
+            </div>
+        </form>
+    </div>
+</div>

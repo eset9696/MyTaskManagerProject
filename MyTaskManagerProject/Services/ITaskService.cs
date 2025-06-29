@@ -4,12 +4,12 @@ namespace MyTaskManagerProject.Services
 {
     public interface ITaskService
     {
-        List<TaskItem> GetTasks();
-        TaskItem GetTaskById(long taskId);
+        List<TaskItem> GetUserTasks(User user);
+        TaskItem? GetTaskById(long taskId);
 
-        bool AddTask(TaskItem newTask);
-        bool EditTask(TaskItem editedTask);
-
+        bool CreateTask(TaskItem newTask);
+        bool EditTask(TaskItem editedTask, long taskId);
+        bool ChangeTaskStatus(long taskId);
         bool DeleteTask(long taskId);
     }
 }

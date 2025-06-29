@@ -5,49 +5,113 @@
 @{
 }
 <div class="container">
+    
     <div>
-        <h2>Списко задач:</h2>
+        <h2>Список задач:</h2>
     </div>
     <div>
+        <div>
+            <a asp-controller="Task" asp-action="NewTask" class="btn btn-primary">Новая задача</a>
+        </div>
         <div>
             <ul class="">
                 @foreach (TaskItem task in ViewBag.Tasks)
                 {
-                    <li class="m-3 p-0">
-                        <div class="card">
-                            <div class="card-header d-xl-inline-flex">
-                                <div class="fw-bold pr-3">
-                                    @task.Title
-                                </div>
-                                <div class="px-3">
-                                    Тип задачи: @task.TaskType
-                                </div>
-                                <div class="px-3">
-                                    Статус:
-                                    @if (task.Status)
-                                    {
-                                        <span class="text-success">
-                                            Выполнено
-                                        </span>
-                                    }
-                                    else
-                                    {
+                    @if (!task.Status)
+                    {
+                        <li class="m-3 p-0">
+                            <div class="card">
+                                <div class="card-header d-xl-inline-flex justify-content-between  bg-primary text-white fw-bold ">
+                                    <div class="pr-3">
+                                        @task.Title
+                                    </div>
+                                    <div class="px-3">
+                                        Тип задачи: @task.TaskType
+                                    </div>
+                                    <div class="px-3 fw-bold">
+                                        Статус:
                                         <span class="text-warning">
                                             В процессе
                                         </span>
-                                    }
+                                    </div>
+                                    <form method="post" asp-controller="Task" asp-action="ChangeTaskStatus">
+                                        <input type="hidden" name="taskId" value="@task.Id" />
+                                        <button class="btn btn-success" type="submit" title="Пометить как выполненое">
+                                            <i class="bi bi-check2-square"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    @task.Description
+                                </div>
+                                <div class="card-footer d-xl-inline-flex justify-content-between">
+                                    <div class="text-success">
+                                        Задача добавлена: @task.CreatedAt
+                                    </div>
+                                    <div class="d-inline-flex">
+                                        <form method="post" asp-controller="Task" asp-action="ChangeTask">
+                                            <input type="hidden" name="taskId" value="@task.Id" />
+                                            <button class="btn btn-info me-3" title="Редактировать задачу">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-controller="Task" asp-action="DeleteTask">
+                                            <input type="hidden" name="taskId" value="@task.Id" />
+                                            <button class="btn btn-danger" type="submit" title="Удалить задачу">
+                                                <i class="bi bi-x-square"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                @task.Description
-                            </div>
-                            <div class="card-footer">
-                                <div class="text-success">
-                                    Задача добавлена: @task.CreatedAt
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="m-3 p-0">
+                            <div class="card text-muted">
+                                <div class="card-header d-xl-inline-flex justify-content-between">
+                                    <div class="fw-bold pr-3 text-decoration-line-through">
+                                        @task.Title
+                                    </div>
+                                    <div class="px-3">
+                                        Тип задачи: @task.TaskType
+                                    </div>
+                                    <div class="px-3 fw-bold">
+                                        Статус:
+                                        <span class="text-success">
+                                            Выполнено
+                                        </span>
+                                    </div>
+                                    <form method="post" asp-controller="Task" asp-action="ChangeTaskStatus">
+                                        <input type="hidden" name="taskId" value="@task.Id" />
+                                        <button class="btn btn-danger" type="submit" title="Пометить как не выполненое">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="card-body text-decoration-line-through">
+                                    @task.Description
+                                </div>
+                                <div class="card-footer d-xl-inline-flex justify-content-between">
+                                    <div class="text-muted">
+                                        Задача добавлена: @task.CreatedAt
+                                    </div>
+                                    <div class="text-success">
+                                        Задача выполнена: @task.DoneAt
+                                    </div>
+                                    <div class="d-inline-flex">
+                                        <form method="post" asp-controller="Task" asp-action="DeleteTask">
+                                            <input type="hidden" name="taskId" value="@task.Id" />
+                                            <button class="btn btn-danger" type="submit" title="Удалить задачу">
+                                                <i class="bi bi-x-square"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 }
             </ul>
         </div>

@@ -12,7 +12,7 @@
 
         public string? PhoneNumber { get; set; }
 
-        public required DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get;set; }
 
