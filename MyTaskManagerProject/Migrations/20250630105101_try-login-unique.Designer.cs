@@ -12,8 +12,8 @@ using MyTaskManagerProject.Data;
 namespace MyTaskManagerProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250630101623_login_and_email_unique")]
-    partial class login_and_email_unique
+    [Migration("20250630105101_try-login-unique")]
+    partial class tryloginunique
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,8 +80,7 @@ namespace MyTaskManagerProject.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -100,9 +99,6 @@ namespace MyTaskManagerProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.HasIndex("Login")
                         .IsUnique();

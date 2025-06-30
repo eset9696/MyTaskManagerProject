@@ -5,18 +5,24 @@
 namespace MyTaskManagerProject.Migrations
 {
     /// <inheritdoc />
-    public partial class init2 : Migration
+    public partial class tryloginunique : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Login",
+                table: "Users",
+                column: "Login",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.DropIndex(
+                name: "IX_Users_Login",
+                table: "Users");
         }
     }
 }

@@ -47,11 +47,17 @@ namespace MyTaskManagerProject.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.ErrorMessage = "Данные для регистрация не валидны!";
+                    return View("SignUp");
+                }
                 _userService.Register(login, password, email, phoneNumber);
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = "Регистрация прошла неуспешно!";
+                return View("SignUp");
             }
             ViewBag.Message = "Вы успешно зарегистрированы!";
             return View("SignUp");

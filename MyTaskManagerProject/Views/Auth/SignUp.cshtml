@@ -17,20 +17,23 @@
         <div class="m-2">
             <form method="post" asp-action="DoRegistration" asp-controller="Auth">
                 <div class="mb-3">
-                    <label class="form-label" asp-for="@Model.Login">Логин:</label>
-                    <input class="form-control" asp-for="@Model.Login" type="text" name="login" />
+                    <label class="form-label" asp-for="Login">Логин:</label>
+                    <input class="form-control" asp-for="Login" type="text" name="login" />
+                    <span class="text-danger" asp-validation-for="Login">Это обязательное поле!</span>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="@Model.Password">Пароль:</label>
-                    <input class="form-control" asp-for="@Model.Password" type="password" name="password" />
+                    <label class="form-label" asp-for="Password">Пароль:</label>
+                    <input class="form-control" asp-for="Password" type="password" name="password" />
+                    <span class="text-danger" asp-validation-for="Password">Это обязательное поле!</span>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="@Model.Email">Адрес электронной почты:</label>
-                    <input class="form-control" asp-for="@Model.Email" type="email" name="email" />
+                    <label class="form-label" asp-for="Email">Адрес электронной почты:</label>
+                    <input class="form-control" asp-for="Email" type="email" name="email" />
+                    <span class="text-danger" asp-validation-for="Password">Это обязательное поле!</span>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="@Model.PhoneNumber">Номер телефона:</label>
-                    <input class="form-control" asp-for="@Model.PhoneNumber" type="tel" name="phoneNumber" />
+                    <label class="form-label" asp-for="PhoneNumber">Номер телефона:</label>
+                    <input class="form-control" asp-for="PhoneNumber" type="tel" name="phoneNumber" />
                 </div>
                 <button class="btn btn-primary" type="submit">Зарегестрироваться</button>
             </form>

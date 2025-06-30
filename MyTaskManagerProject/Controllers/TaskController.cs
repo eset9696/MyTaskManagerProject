@@ -43,11 +43,12 @@ namespace MyTaskManagerProject.Controllers
         [AuthorizedOnly]
         public IActionResult NewTask(TaskItem newTask)
         {
-            if(!ModelState.IsValid)
+            if (newTask.Title == null)
             {
                 ViewBag.ErrorMessage = "Указаны некорректные данные!";
                 return View();
             }
+
             long userId = Convert.ToInt64(HttpContext.Session.GetString("UserId"));
             newTask.UserId = userId;
             _taskService.CreateTask(newTask);

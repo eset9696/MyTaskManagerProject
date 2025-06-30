@@ -16,8 +16,7 @@ namespace MyTaskManagerProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(user=>user.Login).IsUnique();
-            modelBuilder.Entity<User>().HasIndex(user=>user.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(user => user.Login).IsUnique();
         }
     }
 }

@@ -16,9 +16,7 @@ namespace MyTaskManagerProject.Models.Domain
 
 
         [BindProperty]
-        [Required(ErrorMessage = "Логин - обязательное поле!")]
-        [MinLength(5, ErrorMessage = "Логин слишком короткий!")]
-        [MaxLength(15, ErrorMessage = "Логин слишком длинный!")]
+        [Required(ErrorMessage = "email - обязательное поле!")]
         public required string Email { get; set; }
 
 

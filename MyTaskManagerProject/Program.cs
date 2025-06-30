@@ -16,7 +16,7 @@ namespace MyTaskManagerProject
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                string? connectionString = builder.Configuration.GetConnectionString("test");
+                string? connectionString = builder.Configuration.GetConnectionString("Default");
                 if(connectionString == null)
                 {
                     throw new MissingFieldException("Connection string is null!");
