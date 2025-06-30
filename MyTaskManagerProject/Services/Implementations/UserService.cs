@@ -1,4 +1,5 @@
 ﻿using MyTaskManagerProject.Data;
+using MyTaskManagerProject.Helpers;
 using MyTaskManagerProject.Models.Domain;
 
 namespace MyTaskManagerProject.Services.Implementations
@@ -19,7 +20,7 @@ namespace MyTaskManagerProject.Services.Implementations
             User user = new User()
             {
                 Login = login,
-                Password = password,
+                Password = HashHelper.ToSha256(password),
                 Email = email,
                 PhoneNumber = phoneNumber
             };
@@ -29,7 +30,7 @@ namespace MyTaskManagerProject.Services.Implementations
 
         public User? Authorize(string login, string password)
         {
-            return _database.Users.Where(user => user.Login == login && user.Password == password).FirstOrDefault();
+            return _database.Users.Where(user => user.Login == login && user.Password == HashHelper.ToSha256(password)).FirstOrDefault();
         }
 
         public User? GetUserById(long id)

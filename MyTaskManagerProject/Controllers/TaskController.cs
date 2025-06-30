@@ -24,12 +24,12 @@ namespace MyTaskManagerProject.Controllers
         public IActionResult GetAllTasks()
         {
             User? user = _userService.GetUserById(Convert.ToInt64(HttpContext.Session.GetString("UserId")));
-            /*if (user is null)
+            if (user != null)
             {
-                RedirectToAction(controllerName: "Home", actionName: "Index");
-            }*/
-            ViewBag.Tasks = _taskService.GetUserTasks(user);
-            return View();
+                ViewBag.Tasks = _taskService.GetUserTasks(user);
+                return View();
+            }
+            return RedirectToAction(controllerName: "Home", actionName: "Index");
         }
 
         [HttpGet]
