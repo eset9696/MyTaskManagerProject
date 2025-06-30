@@ -45,35 +45,22 @@ namespace MyTaskManagerProject.Controllers
         [HttpPost]
         public IActionResult DoRegistration(string login, string password, string email, string phoneNumber)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = "Данные для регистрация не валидны!";
+                return View("SignUp");
+            }
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    ViewBag.ErrorMessage = "Данные для регистрация не валидны!";
-                    return View("SignUp");
-                }
                 _userService.Register(login, password, email, phoneNumber);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.ErrorMessage = "Регистрация прошла неуспешно!";
+                ViewBag.ErrorMessage = "Упс! Что-то пошло не так!";
                 return View("SignUp");
             }
             ViewBag.Message = "Вы успешно зарегистрированы!";
             return View("SignUp");
         }
-
-        /*
-         * public long Id { get; set; }
-
-        public required string Login { get; set; }
-
-        public required string Email { get; set; }
-
-        public required string Password { get; set; }
-
-        public string? PhoneNumber { get; set; }
-         */
-
     }
 }

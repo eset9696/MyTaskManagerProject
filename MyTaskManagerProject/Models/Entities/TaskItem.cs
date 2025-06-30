@@ -22,6 +22,8 @@ namespace MyTaskManagerProject.Models.Domain
         [BindProperty]
         [MaxLength(400, ErrorMessage = "Описание задачи слишком длинное!")]
         public string? Description { get; set; }
+
+
         public bool Status { get; set; } = false;
         public TaskTypeEnum TaskType { get; set; } = TaskTypeEnum.Daily;
 
