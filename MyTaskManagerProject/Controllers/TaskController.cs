@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyTaskManagerProject.Enums;
+using MyTaskManagerProject.Filters;
 using MyTaskManagerProject.Models.Domain;
 using MyTaskManagerProject.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyTaskManagerProject.Controllers
 {
@@ -17,26 +20,34 @@ namespace MyTaskManagerProject.Controllers
 
         [HttpGet]
         [ActionName("Index")]
+        [AuthorizedOnly]
         public IActionResult GetAllTasks()
         {
             User? user = _userService.GetUserById(Convert.ToInt64(HttpContext.Session.GetString("UserId")));
-            if (user is null)
+            /*if (user is null)
             {
-                throw new Exception();
-            }
+                RedirectToAction(controllerName: "Home", actionName: "Index");
+            }*/
             ViewBag.Tasks = _taskService.GetUserTasks(user);
             return View();
         }
 
         [HttpGet]
+        [AuthorizedOnly]
         public IActionResult NewTask()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateTask(TaskItem newTask)
+        [AuthorizedOnly]
+        public IActionResult NewTask(TaskItem newTask)
         {
+            if(!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = "Указаны некорректные данные!";
+                return View();
+            }
             long userId = Convert.ToInt64(HttpContext.Session.GetString("UserId"));
             newTask.UserId = userId;
             _taskService.CreateTask(newTask);
@@ -44,6 +55,7 @@ namespace MyTaskManagerProject.Controllers
         }
 
         [HttpPost]
+        [AuthorizedOnly]
         public IActionResult DeleteTask(long taskId)
         {
             _taskService.DeleteTask(taskId);
@@ -51,13 +63,15 @@ namespace MyTaskManagerProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult ChangeTask(long taskId)
+        [AuthorizedOnly]
+        public IActionResult EditTask(long taskId)
         {
             ViewBag.taskId = taskId;
             return View();
         }
 
         [HttpPost]
+        [AuthorizedOnly]
         public IActionResult EditTask(TaskItem editedTask, long taskId)
         {
             _taskService.EditTask(editedTask, taskId);
@@ -65,6 +79,7 @@ namespace MyTaskManagerProject.Controllers
         }
 
         [HttpPost]
+        [AuthorizedOnly]
         public IActionResult ChangeTaskStatus(long taskId)
         {
             _taskService.ChangeTaskStatus(taskId);

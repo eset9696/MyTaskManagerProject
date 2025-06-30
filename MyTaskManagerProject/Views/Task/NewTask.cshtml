@@ -1,18 +1,25 @@
 ﻿@model MyTaskManagerProject.Models.Domain.TaskItem
 @using MyTaskManagerProject.Enums
 <div class="container">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            <p class="alert alert-danger">@ViewBag.ErrorMessage</p>
+        </div>
+    }
     <div>
         <h2>Новая задача:</h2>
     </div>
     <div>
-        <form method="post" asp-action="CreateTask" asp-controller="Task">
+        <form method="post" asp-action="NewTask" asp-controller="Task">
             <div class="mb-3 d-xl-inline-flex justify-content-end w-100">
                 <div class="me-3 flex-grow-1">
                     <div>
                         <label asp-for="Title">Заголовок задачи:</label>
                     </div>
                     <div>
-                        <input class="form-control" type="text" name="Title" asp-for="Title" required/>
+                        <input class="form-control" type="text" name="Title" asp-for="Title"/>
+                        <span class="text-danger" asp-validation-for="Title"></span>
                     </div>
                 </div>
                 <div class="">
@@ -33,6 +40,7 @@
                     <label asp-for="Description">Описание задачи:</label>
                 </div>
                 <textarea class="form-control" name="Description" rows="20" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
             </div>
             <div>
                 <input type="hidden" asp-for="UserId" name="userId" value="@ViewBag.UserId" />

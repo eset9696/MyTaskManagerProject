@@ -2,6 +2,12 @@
 @using MyTaskManagerProject.Enums
 
 <div class="container">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            <p class="alert alert-danger">@ViewBag.ErrorMessage</p>
+        </div>
+    }
     <div>
         <h2>Редактирование задачи:</h2>
     </div>
@@ -14,6 +20,7 @@
                     </div>
                     <div>
                         <input class="form-control" type="text" name="Title" asp-for="Title" required />
+                        <span class="text-danger" asp-validation-for="Title"></span>
                     </div>
                 </div>
                 <div class="">
@@ -34,6 +41,7 @@
                     <label asp-for="Description">Новое описание задачи:</label>
                 </div>
                 <textarea class="form-control" name="Description" rows="20" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
             </div>
             <div>
                 <input type="hidden" name="taskId" value="@ViewBag.taskId" />
