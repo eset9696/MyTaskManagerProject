@@ -11,19 +11,25 @@ namespace MyTaskManagerProject.Services.Implementations
         {
             _database = database;
         }
-        public void CreateUser(User user)
+
+
+
+        public void Register(string login, string password, string email, string phoneNumber)
         {
-            throw new NotImplementedException();
+            User user = new User()
+            {
+                Login = login,
+                Password = password,
+                Email = email,
+                PhoneNumber = phoneNumber
+            };
+            _database.Users.Add(user);
+            _database.SaveChanges();
         }
 
-        public void DeleteUser(long id)
+        public User? Authorize(string login, string password)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EditUser(User user)
-        {
-            throw new NotImplementedException();
+            return _database.Users.Where(user => user.Login == login && user.Password == password).FirstOrDefault();
         }
 
         public User? GetUserById(long id)

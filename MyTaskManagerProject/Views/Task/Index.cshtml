@@ -47,8 +47,14 @@
                                     <div class="text-success">
                                         Задача добавлена: @task.CreatedAt
                                     </div>
+                                    @if(task.UpdatedAt is not null)
+                                    {
+                                        <div class="text-success">
+                                            Задача обновлена: @task.UpdatedAt
+                                        </div>
+                                    }
                                     <div class="d-inline-flex">
-                                        <form method="post" asp-controller="Task" asp-action="ChangeTask">
+                                        <form method="get" asp-controller="Task" asp-action="ChangeTask">
                                             <input type="hidden" name="taskId" value="@task.Id" />
                                             <button class="btn btn-info me-3" title="Редактировать задачу">
                                                 <i class="bi bi-pencil"></i>

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-
+@{
+}
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -11,10 +12,16 @@
 <body>
     <header>
         <nav class="navbar navbar-light bg-primary">
-            <div class="container  text-white">
-                <a class="navbar-brand" href="#">
+            <div class="container  text-white d-xl-inline-flex">
+                <div class="">
+                    <a class="navbar-brand" href="#">
                     BattleTask
-                </a>
+                    </a>
+                </div>
+                <div>
+                    <a asp-controller="Auth" asp-action="SignIn" class="btn btn-success">Войти</a>
+                    <a asp-controller="Auth" asp-action="SignUp" class="btn btn-warning">Зарегестрироваться</a>
+                </div>
             </div>
         </nav>
     </header>

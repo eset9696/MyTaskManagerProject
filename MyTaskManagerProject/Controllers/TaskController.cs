@@ -19,7 +19,7 @@ namespace MyTaskManagerProject.Controllers
         [ActionName("Index")]
         public IActionResult GetAllTasks()
         {
-            User? user = _userService.GetUserById(1);
+            User? user = _userService.GetUserById(Convert.ToInt64(HttpContext.Session.GetString("UserId")));
             if (user is null)
             {
                 throw new Exception();
@@ -37,7 +37,8 @@ namespace MyTaskManagerProject.Controllers
         [HttpPost]
         public IActionResult CreateTask(TaskItem newTask)
         {
-            newTask.UserId = 1;
+            long userId = Convert.ToInt64(HttpContext.Session.GetString("UserId"));
+            newTask.UserId = userId;
             _taskService.CreateTask(newTask);
             return RedirectToAction("Index");
         }
@@ -49,7 +50,7 @@ namespace MyTaskManagerProject.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult ChangeTask(long taskId)
         {
             ViewBag.taskId = taskId;

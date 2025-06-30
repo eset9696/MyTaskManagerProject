@@ -1,0 +1,25 @@
+﻿
+<div class="container w-25 p-3">
+    @if (ViewBag.ErrorMessage is not null)
+    {
+        <p class="alert alert-danger">@ViewBag.ErrorMessage</p>
+    }
+    <div class="p-2 m-3 align-self-center align-middle card">
+        <div class="mb-2 align-self-center">
+            <h4>Авторизация</h4>
+        </div>
+        <div class="m-2">
+            <form method="post" asp-action="DoLogin" asp-controller="Auth">
+                <div class="mb-3">
+                    <label class="form-label" for="login">Логин:</label>
+                    <input class="form-control" type="text" name="login" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Пароль:</label>
+                    <input class="form-control" type="password" name="password" />
+                </div>
+                <button class="btn btn-primary" type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+</div>

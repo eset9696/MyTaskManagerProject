@@ -6,10 +6,8 @@ namespace MyTaskManagerProject.Services
     {
         User? GetUserById(long id);
         
-        void CreateUser(User user);
+        void Register(string login, string password, string email, string phoneNumber);
 
-        void EditUser(User user);
-
-        void DeleteUser(long id);
+        User? Authorize(string login, string password);
     }
 }
